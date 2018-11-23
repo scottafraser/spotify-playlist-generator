@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+  background-image: 100%;
+}
+
+.mainBody {
+  margin-top: 5%;
+}
+
+.topInfo {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.artistChips {
+  grid-template-columns: col 3 / span 3;
+  max-height: 500px;
+  overflow: auto;
+}
+
+#bottom-fade {
+  z-index: 2;
+  position: fixed;
+  height: 1000px;
+  width: 100%;
+  bottom: 0%;
+  background-color: linear-gradient(rgba(0, 255, 85, 0.5), rgb(4, 92, 33));
+}
+// .searchBar {
+//   size: 3em;
+// }
+
+.playlists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2%;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 1180px;
+  border-radius: 50%;
+}
+
+#nowPlayingCard {
+  text-align: center;
+  padding: 2%;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
