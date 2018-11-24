@@ -1,13 +1,14 @@
+require("dotenv").config();
+
 const express = require('express');
 const path = require('path');
 const generatePassword = require('password-generator');
 const request = require("request"); // "Request" library
 const cors = require("cors");
 const querystring = require("querystring");
-// const cookieParser = require("cookie-parser");
-const client_id = process.env.CLIENT_ID; // Your client id
-const client_secret = process.env.CLIENT_SECRET; // Your secret
-const redirect_uri = "http://localhost:3000/callback"; // Your redirect uri
+var client_id = process.env.CLIENT_ID; // Your client id
+var client_secret = process.env.CLIENT_SECRET; // Your secret
+const redirect_uri = "http://localhost:5000/callback"; // Your redirect uri
 
 
 
@@ -29,32 +30,12 @@ console.log(stateKey + "here");
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
-// Add headers
-app.use(function (req, res, next) {
+app.use(express.static(path.join(__dirname, '/')));
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/api/login');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
-// app.use(cors());
-
-app.get("/api/login", function (req, res) {
+app.get("/login", function (req, res) {
+    console.log(process.env)
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
-    console.log(process.env.client_id);
     // your application requests authorization
     var scope =
         "user-top-read user-read-private user-read-email user-read-playback-state user-library-read playlist-read-private user-read-recently-played playlist-modify-public playlist-modify-private";
@@ -78,71 +59,71 @@ app.get("/callback", function (req, res) {
     var state = req.query.state || null;
     var storedState = req.cookies ? req.cookies[stateKey] : null;
 
-    if (state === null || state !== storedState) {
-        res.redirect(
-            "/#" +
-            querystring.stringify({
-                error: "state_mismatch"
-            })
-        );
-    } else {
-        res.clearCookie(stateKey);
-        var authOptions = {
-            url: "https://accounts.spotify.com/api/token",
-            form: {
-                code: code,
-                redirect_uri: redirect_uri,
-                grant_type: "authorization_code"
-            },
-            headers: {
-                Authorization:
-                    "Basic " +
-                    new Buffer(client_id + ":" + client_secret).toString("base64")
-            },
-            json: true
-        };
+    // if (state === null || state !== storedState) {
+    //     res.redirect(
+    //         "/#" +
+    //         querystring.stringify({
+    //             error: "state_mismatch"
+    //         })
+    //     );
+    // } else {
+    res.clearCookie(stateKey);
+    var authOptions = {
+        url: "https://accounts.spotify.com/api/token",
+        form: {
+            code: code,
+            redirect_uri: redirect_uri,
+            grant_type: "authorization_code"
+        },
+        headers: {
+            Authorization:
+                "Basic " +
+                new Buffer(client_id + ":" + client_secret).toString("base64")
+        },
+        json: true
+    };
 
-        request.post(authOptions, function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-                var access_token = body.access_token,
-                    refresh_token = body.refresh_token;
+    request.post(authOptions, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            var access_token = body.access_token,
+                refresh_token = body.refresh_token;
 
-                var options = {
-                    url: "https://api.spotify.com/v1/me",
-                    headers: { Authorization: "Bearer " + access_token },
-                    json: true
-                };
+            var options = {
+                url: "https://api.spotify.com/v1/me",
+                headers: { Authorization: "Bearer " + access_token },
+                json: true
+            };
 
-                // use the access token to access the Spotify Web API
-                request.get(options, function (error, response, body) {
-                    console.log(body);
-                });
+            // use the access token to access the Spotify Web API
+            request.get(options, function (error, response, body) {
+                console.log(body);
+            });
 
-                // we can also pass the token to the browser to make requests from there
-                res.json({
+            // we can also pass the token to the browser to make requests from there
+            // res.json({
+            //     access_token: access_token,
+            //     refresh_token: refresh_token
+            // });
+            res.redirect(
+                "http://localhost:3000/#" +
+                querystring.stringify({
                     access_token: access_token,
                     refresh_token: refresh_token
-                });
-                // res.redirect(
-                //     "http://localhost:3000/#" +
-                //     querystring.stringify({
-                //         access_token: access_token,
-                //         refresh_token: refresh_token
-                //     })
-                // );
-            } else {
-                res.json({
+                })
+            );
+        } else {
+            // res.json({
+            //     error: "invalid_token"
+            // });
+            res.redirect(
+                "/#" +
+                querystring.stringify({
                     error: "invalid_token"
-                });
-                // res.redirect(
-                //     "/#" +
-                //     querystring.stringify({
-                //         error: "invalid_token"
-                //     })
-                // );
-            }
-        });
-    }
+                })
+            );
+        }
+    });
+    // }
 });
 
 app.get("/logout", function (req, res) {
@@ -178,19 +159,19 @@ app.get("/refresh_token", function (req, res) {
 
 
 // Put all API endpoints under '/api'
-app.get('/api/passwords', (req, res) => {
-    const count = 5;
+// app.get('/api/passwords', (req, res) => {
+//     const count = 5;
 
-    // Generate some passwords
-    const passwords = Array.from(Array(count).keys()).map(i =>
-        generatePassword(12, false)
-    )
+//     // Generate some passwords
+//     const passwords = Array.from(Array(count).keys()).map(i =>
+//         generatePassword(12, false)
+//     )
 
-    // Return them as json
-    res.json(passwords);
+//     // Return them as json
+//     res.json(passwords);
 
-    console.log(`Sent ${count} passwords`);
-});
+//     console.log(`Sent ${count} passwords`);
+// });
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

@@ -42,47 +42,28 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getPasswords();
-    // var hashParams = {};
-    // var e,
-    //   r = /([^&;=]+)=?([^&;]*)/g,
-    //   q = window.location.hash.substring(1);
-    // e = r.exec(q);
-    // while (e) {
-    //   hashParams[e[1]] = decodeURIComponent(e[2]);
-    //   e = r.exec(q);
-    // }
-    // const token = hashParams.access_token;
-    // if (token) {
-    //   spotifyApi.setAccessToken(token);
-    // }
-    // spotifyApi.getMe().then(response => {
-    //   this.props.setUser(response);
-    //   let userLoggedIn = token ? true : false;
-    //   this.props.loggedIn(userLoggedIn);
-    // });
+    var hashParams = {};
+    var e,
+      r = /([^&;=]+)=?([^&;]*)/g,
+      q = window.location.hash.substring(1);
+    e = r.exec(q);
+    while (e) {
+      hashParams[e[1]] = decodeURIComponent(e[2]);
+      e = r.exec(q);
+    }
+    const token = hashParams.access_token;
+    console.log(token)
+    if (token) {
+      spotifyApi.setAccessToken(token);
+    }
+    spotifyApi.getMe().then(response => {
+      this.props.setUser(response);
+      let userLoggedIn = token ? true : false;
+      this.props.loggedIn(userLoggedIn);
+    });
     // this is the url mask
-    // window.history.pushState(null, "", "/user");
+    window.history.pushState(null, "", "/user");
   }
-
-  getPasswords = () => {
-    // Get the passwords and store them in state
-    fetch('/api/passwords')
-      .then(response =>
-        console.log(response))
-    // .then(res => res.json())
-    // .then(passwords => this.setState({ passwords }));
-  }
-
-  loginToSpotify = () => {
-    // Get the passwords and store them in state
-    fetch('/api/login')
-      .then(response =>
-        console.log(response))
-      .then(res => res.json())
-      .then(passwords => this.setState({ passwords }));
-  }
-
   updateInput = e => {
     this.setState({
       genre: e.target.value
@@ -207,40 +188,6 @@ class App extends Component {
             </div>
           </div>
           <div className="playlists">
-            {/* Render the passwords if we have them */}
-            {passwords.length ? (
-              <div>
-                <h1>5 Passwords.</h1>
-                <ul className="passwords">
-                  {/*
-                Generally it's bad to use "index" as a key.
-                It's ok for this example because there will always
-                be the same number of passwords, and they never
-                change positions in the array.
-              */}
-                  {passwords.map((password, index) =>
-                    <li key={index}>
-                      {password}
-                    </li>
-                  )}
-                </ul>
-                <button
-                  className="more"
-                  onClick={this.loginToSpotify}>
-                  Get More
-            </button>
-              </div>
-            ) : (
-                // Render a helpful message otherwise
-                <div>
-                  <h1>No passwords :(</h1>
-                  <button
-                    className="more"
-                    onClick={this.loginToSpotify}>
-                    Try Again?
-            </button>
-                </div>
-              )}
             {this.props.createPlaylistTracks.map(track => (
               <Card
                 key={track.id}

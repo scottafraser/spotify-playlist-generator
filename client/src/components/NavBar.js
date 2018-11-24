@@ -93,7 +93,7 @@ class ButtonAppBar extends Component {
     const open = Boolean(anchorEl);
 
     let loggy = (
-      <Button href="http://localhost:8888" color="inherit">
+      <Button href="http://localhost:5000" color="inherit">
         Login to Spotify
       </Button>
     );
@@ -140,7 +140,7 @@ class ButtonAppBar extends Component {
               onClose={this.handleClose}
             >
               <SongCard nowPlaying={this.props.nowPlaying} />
-              <MenuItem onClick={() => this.handleSongClick( this.props.nowPlaying.id)}>
+              <MenuItem onClick={() => this.handleSongClick(this.props.nowPlaying.id)}>
                 <Emoji symbol="☝️ " />
                 Make Into Playlist
               </MenuItem>
