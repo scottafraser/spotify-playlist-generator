@@ -2,15 +2,12 @@ require("dotenv").config();
 
 const express = require('express');
 const path = require('path');
-const generatePassword = require('password-generator');
 const request = require("request"); // "Request" library
-const cors = require("cors");
+// const cors = require("cors");
 const querystring = require("querystring");
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 const redirect_uri = "http://localhost:5000/callback"; // Your redirect uri
-
-
 
 var generateRandomString = function (length) {
     var text = "";
