@@ -2,12 +2,11 @@ require("dotenv").config();
 
 const express = require('express');
 const path = require('path');
-const request = require("request"); // "Request" library
-// const cors = require("cors");
+const request = require("request");
 const querystring = require("querystring");
-var client_id = process.env.CLIENT_ID; // Your client id
-var client_secret = process.env.CLIENT_SECRET; // Your secret
-const redirect_uri = "https://fierce-fjord-94321.herokuapp.com/callback"; // Your redirect uri
+var client_id = process.env.CLIENT_ID;
+var client_secret = process.env.CLIENT_SECRET;
+const redirect_uri = "https://spotify-shuffle.herokuapp.com/callback"; // Your redirect uri
 
 
 var generateRandomString = function (length) {
@@ -22,12 +21,9 @@ var generateRandomString = function (length) {
 };
 
 var stateKey = "spotify_auth_state";
-console.log(stateKey + "here");
-
 
 const app = express();
 
-// Serve static files from the React app
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -52,21 +48,8 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/callback", function (req, res) {
-    // your application requests refresh and access tokens
-    // after checking the state parameter
 
     var code = req.query.code || null;
-    var state = req.query.state || null;
-    var storedState = req.cookies ? req.cookies[stateKey] : null;
-
-    // if (state === null || state !== storedState) {
-    //     res.redirect(
-    //         "/#" +
-    //         querystring.stringify({
-    //             error: "state_mismatch"
-    //         })
-    //     );
-    // } else {
     res.clearCookie(stateKey);
     var authOptions = {
         url: "https://accounts.spotify.com/api/token",
@@ -93,28 +76,16 @@ app.get("/callback", function (req, res) {
                 headers: { Authorization: "Bearer " + access_token },
                 json: true
             };
-
-            // use the access token to access the Spotify Web API
             request.get(options, function (error, response, body) {
-                console.log(body);
             });
-
-            // we can also pass the token to the browser to make requests from there
-            // res.json({
-            //     access_token: access_token,
-            //     refresh_token: refresh_token
-            // });
             res.redirect(
-                "https://fierce-fjord-94321.herokuapp.com/#" +
+                "https://spotify-shuffle.herokuapp.com/#" +
                 querystring.stringify({
                     access_token: access_token,
                     refresh_token: refresh_token
                 })
             );
         } else {
-            // res.json({
-            //     error: "invalid_token"
-            // });
             res.redirect(
                 "/#" +
                 querystring.stringify({
@@ -123,7 +94,6 @@ app.get("/callback", function (req, res) {
             );
         }
     });
-    // }
 });
 
 app.get("/logout", function (req, res) {
@@ -131,7 +101,6 @@ app.get("/logout", function (req, res) {
 });
 
 app.get("/refresh_token", function (req, res) {
-    // requesting access token from refresh token
     var refresh_token = req.query.refresh_token;
     var authOptions = {
         url: "https://accounts.spotify.com/api/token",
@@ -157,24 +126,6 @@ app.get("/refresh_token", function (req, res) {
     });
 });
 
-
-// Put all API endpoints under '/api'
-// app.get('/api/passwords', (req, res) => {
-//     const count = 5;
-
-//     // Generate some passwords
-//     const passwords = Array.from(Array(count).keys()).map(i =>
-//         generatePassword(12, false)
-//     )
-
-//     // Return them as json
-//     res.json(passwords);
-
-//     console.log(`Sent ${count} passwords`);
-// });
-
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });

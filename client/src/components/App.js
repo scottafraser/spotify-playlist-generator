@@ -52,7 +52,6 @@ class App extends Component {
       e = r.exec(q);
     }
     const token = hashParams.access_token;
-    console.log(token)
     if (token) {
       spotifyApi.setAccessToken(token);
     }
@@ -148,24 +147,14 @@ class App extends Component {
   };
 
   render() {
-    const { passwords } = this.state;
-    if (this.props.artistList === undefined) {
-    }
-    // if (this.props.hasErrored) {
-    //   return <p>Sorry! There was an error loading the items</p>;
-    // }
-    // if (this.props.isLoading) {
-    //   return <p>Loading…</p>;
-    // }
-
     return <MuiThemeProvider theme={theme}>
       <div className="App">
         <NavBar user={this.props.user} login={this.props.isLoggedIn} nowPlaying={this.props.nowPlaying} createSongList={this.createSongList} />
         <div className="mainBody">
           <div className="topInfo">
-            <div>
+            {/* <div>
               <PlaylistStyle />
-            </div>
+            </div> */}
             <div>
               <img src={record} alt="record" className="App-logo" style={{ height: 150 }} />
               {this.props.isLoggedIn && <PlaylistSelect createGenreList={this.createGenrePlaylist} createArtistList={this.createArtistPlaylist} />}
@@ -178,13 +167,13 @@ class App extends Component {
                   createArtistList={this.updateArtist}
                 />
               ))}
-              {this.state.genreList.map((genre, index) => (
+              {/* {this.state.genreList.map((genre, index) => (
                 <GenreChips
                   key={index}
                   chipGenre={genre}
                   createGenreList={this.createGenrePlaylist}
                 />
-              ))}
+              ))} */}
             </div>
           </div>
           <div className="playlists">
@@ -246,6 +235,17 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+
+    // if (this.props.artistList === undefined) {
+    // }
+    // if (this.props.hasErrored) {
+    //   return <p>Sorry! There was an error loading the items</p>;
+    // }
+    // if (this.props.isLoading) {
+    //   return <p>Loading…</p>;
+    // }
+
 
 // getRecentTracks() {
 

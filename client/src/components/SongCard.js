@@ -5,8 +5,8 @@ class SongCard extends Component {
   render() {
     if (this.props.nowPlaying.artists === undefined) {
       return (
-        <div>
-          <p>LOG IN</p>
+        <div id="nowPlayingCard">
+          <p>Nothing Playling</p>
         </div>
       );
     } else {
@@ -16,7 +16,7 @@ class SongCard extends Component {
           {this.props.nowPlaying.artists[0].name}
           <br />
           <br />
-          <img src={this.props.nowPlaying.album.images[2].url} alt="song"/>
+          <img src={this.props.nowPlaying.album.images[2].url} alt="song" />
           <br />
           <br />
           {this.props.nowPlaying.name}

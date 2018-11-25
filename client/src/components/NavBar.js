@@ -144,10 +144,10 @@ class ButtonAppBar extends Component {
                 <Emoji symbol="☝️ " />
                 Make Into Playlist
               </MenuItem>
-              <MenuItem>
+              {/* <MenuItem>
                 <Emoji symbol="🍺 " />
                 Buy Me a Beer
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Menu>
 
