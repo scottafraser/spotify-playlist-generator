@@ -7,7 +7,7 @@ const request = require("request"); // "Request" library
 const querystring = require("querystring");
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
-const redirect_uri = "http://localhost:5000/callback"; // Your redirect uri
+const redirect_uri = "/callback"; // Your redirect uri
 
 var generateRandomString = function (length) {
     var text = "";
