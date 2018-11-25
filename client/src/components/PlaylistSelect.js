@@ -58,10 +58,12 @@ class PlaylistSelect extends React.Component {
   };
 
   onArtistClick = e => {
+    e.preventDefault();
     this.props.createArtistList(e);
   };
 
   onGenreClick = e => {
+    e.preventDefault();
     this.props.createGenreList(e);
   };
 
@@ -108,7 +110,7 @@ class PlaylistSelect extends React.Component {
         </Button>
         {this.state.showGenre && (
           <div>
-            <form className="{classes.container}" noValidate autoComplete="off">
+            <form className="{classes.container}" noValidate autoComplete="off" onSubmit={this.onGenreClick}>
               <TextField
                 id="outlined-genre"
                 label="Genre"
@@ -117,7 +119,6 @@ class PlaylistSelect extends React.Component {
                 onChange={this.handleGenreChange}
                 margin="normal"
                 variant="outlined"
-                // onSubmit={this.onGenreClick}
               />
             </form>
             <Button
@@ -126,13 +127,13 @@ class PlaylistSelect extends React.Component {
               color="primary"
               className={classes.button}
             >
-              Create Playlist
+              Shuffle Playlist
             </Button>
           </div>
         )}
         {this.state.showArtist && (
           <div>
-            <form className="{classes.container}" noValidate autoComplete="off">
+            <form className="{classes.container}" noValidate autoComplete="off" onSubmit={this.onArtistClick}>
               <TextField
                 id="outlined-artist"
                 label="Artist"
@@ -149,7 +150,7 @@ class PlaylistSelect extends React.Component {
               color="primary"
               className={classes.button}
             >
-              Create Playlist
+              Shuffle Playlist
             </Button>
           </div>
         )}
