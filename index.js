@@ -27,7 +27,8 @@ console.log(stateKey + "here");
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '/')));
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get("/login", function (req, res) {
     console.log(process.env)
