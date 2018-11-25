@@ -42,6 +42,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    document.title = "Spotify Shuffle";
     var hashParams = {};
     var e,
       r = /([^&;=]+)=?([^&;]*)/g,
@@ -152,9 +153,9 @@ class App extends Component {
         <NavBar user={this.props.user} login={this.props.isLoggedIn} nowPlaying={this.props.nowPlaying} createSongList={this.createSongList} />
         <div className="mainBody">
           <div className="topInfo">
-            {/* <div>
-              <PlaylistStyle />
-            </div> */}
+            <div>
+              {/* <PlaylistStyle /> */}
+            </div>
             <div>
               <img src={record} alt="record" className="App-logo" style={{ height: 150 }} />
               {this.props.isLoggedIn && <PlaylistSelect createGenreList={this.createGenrePlaylist} createArtistList={this.createArtistPlaylist} />}
