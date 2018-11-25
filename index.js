@@ -29,6 +29,7 @@ const app = express();
 // Serve static files from the React app
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.get("/login", function (req, res) {
     console.log(process.env)
