@@ -9,6 +9,7 @@ var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 const redirect_uri = "https://fierce-fjord-94321.herokuapp.com/callback"; // Your redirect uri
 
+
 var generateRandomString = function (length) {
     var text = "";
     var possible =
@@ -104,7 +105,7 @@ app.get("/callback", function (req, res) {
             //     refresh_token: refresh_token
             // });
             res.redirect(
-                "http://localhost:3000/#" +
+                "https://fierce-fjord-94321.herokuapp.com/#" +
                 querystring.stringify({
                     access_token: access_token,
                     refresh_token: refresh_token

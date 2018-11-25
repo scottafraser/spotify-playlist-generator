@@ -93,7 +93,7 @@ class ButtonAppBar extends Component {
     const open = Boolean(anchorEl);
 
     let loggy = (
-      <Button href="http://localhost:5000" color="inherit">
+      <Button href="/login" color="inherit">
         Login to Spotify
       </Button>
     );
