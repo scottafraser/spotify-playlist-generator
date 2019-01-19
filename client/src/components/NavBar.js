@@ -58,14 +58,13 @@ class ButtonAppBar extends Component {
     this.setState({ anchorEl: null });
   };
 
-
   handleLogout = () => {
     window.location = "/#";
     window.open("https://www.spotify.com/us/logout");
     this.handleClose();
   };
 
-  handleSongClick = (id) => {
+  handleSongClick = id => {
     this.props.createSongList(id);
   };
 
@@ -140,7 +139,9 @@ class ButtonAppBar extends Component {
               onClose={this.handleClose}
             >
               <SongCard nowPlaying={this.props.nowPlaying} />
-              <MenuItem onClick={() => this.handleSongClick(this.props.nowPlaying.id)}>
+              <MenuItem
+                onClick={() => this.handleSongClick(this.props.nowPlaying.id)}
+              >
                 <Emoji symbol="☝️ " />
                 Make Into Playlist
               </MenuItem>
@@ -152,11 +153,7 @@ class ButtonAppBar extends Component {
             </Menu>
 
             {/* <MenuIcon /> */}
-            <Typography
-              variant="h3"
-              color="inherit"
-              className={classes.grow}
-            >
+            <Typography variant="h3" color="inherit" className={classes.grow}>
               {/* Spotify Playlist Generator */}
             </Typography>
             {loggy}
