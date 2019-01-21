@@ -20,8 +20,12 @@ const styles = {
   }
 };
 
+//need to build function to resize image depending on window size
+
 function MediaCard(props) {
+  console.log(props.track);
   const { classes } = props;
+  const track = props.track;
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -33,6 +37,8 @@ function MediaCard(props) {
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.name}
+            <br />
+            <i>{track.artists[0].name}</i>
           </Typography>
           <Typography component="p">{props.artist}</Typography>
         </CardContent>

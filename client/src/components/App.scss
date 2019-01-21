@@ -38,6 +38,17 @@
   padding: 2%;
 }
 
+@media only screen and (max-width: 600px) {
+  .topInfo {
+    grid-template-columns: 1fr;
+    display: felx;
+    flex-direction: column;
+  }
+  .artistChips {
+    display: none;
+  }
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 1180px;

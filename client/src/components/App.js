@@ -203,6 +203,7 @@ class App extends Component {
             <div className="playlists">
               {this.props.createPlaylistTracks.map(track => (
                 <Card
+                  track={track}
                   key={track.id}
                   id={track.id}
                   name={track.name}
