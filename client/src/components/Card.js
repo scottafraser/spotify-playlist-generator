@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -8,6 +8,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import * as itemActions from "../actions/items";
+import compose from "recompose/compose";
 
 const styles = {
   card: {
@@ -22,10 +25,14 @@ const styles = {
 
 //need to build function to resize image depending on window size
 
+// handleSongClick(id => {
+//   this.props.createSongList(id);
+// });
+
 function MediaCard(props) {
-  console.log(props.track);
   const { classes } = props;
   const track = props.track;
+  console.log(props);
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -47,7 +54,11 @@ function MediaCard(props) {
         {/* <Button size="small" color="primary">
           Replace
         </Button> */}
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          // onClick={() => props.createSongList(0)}
+        >
           Make Playlist on Song
         </Button>
       </CardActions>
@@ -60,4 +71,25 @@ MediaCard.propTypes = {
   name: PropTypes.string
 };
 
-export default withStyles(styles)(MediaCard);
+const mapStateToProps = state => {
+  return {
+    genre: state.genre,
+    artist: state.artist,
+    showHome: state.showHome,
+    nowPlaying: state.nowPlaying
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getSong: response => dispatch(itemActions.getUserCurrentSong(response))
+  };
+};
+
+export default compose(
+  withStyles(styles, { name: "Card" }),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(MediaCard);
