@@ -70,7 +70,9 @@ class ButtonAppBar extends Component {
 
   getNowPlaying = () => {
     spotifyApi.getMyCurrentPlaybackState().then(response => {
-      this.props.getSong(response.item);
+      if (response.is_playing === true) {
+        this.props.getSong(response.item);
+      }
     });
     this.handleClose();
   };

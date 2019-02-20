@@ -54,13 +54,13 @@ function MediaCard(props) {
         {/* <Button size="small" color="primary">
           Replace
         </Button> */}
-        <Button
+        {/* <Button
           size="small"
           color="primary"
           // onClick={() => props.createSongList(0)}
         >
           Make Playlist on Song
-        </Button>
+        </Button> */}
       </CardActions>
     </Card>
   );

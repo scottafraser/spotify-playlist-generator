@@ -110,7 +110,12 @@ class PlaylistSelect extends React.Component {
         </Button>
         {this.state.showGenre && (
           <div>
-            <form className="{classes.container}" noValidate autoComplete="off" onSubmit={this.onGenreClick}>
+            <form
+              className="{classes.container}"
+              noValidate
+              autoComplete="off"
+              onSubmit={this.onGenreClick}
+            >
               <TextField
                 id="outlined-genre"
                 label="Genre"
@@ -133,7 +138,12 @@ class PlaylistSelect extends React.Component {
         )}
         {this.state.showArtist && (
           <div>
-            <form className="{classes.container}" noValidate autoComplete="off" onSubmit={this.onArtistClick}>
+            <form
+              className="{classes.container}"
+              noValidate
+              autoComplete="off"
+              onSubmit={this.onArtistClick}
+            >
               <TextField
                 id="outlined-artist"
                 label="Artist"

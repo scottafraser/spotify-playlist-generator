@@ -53,7 +53,6 @@ export function user(state = {}, action) {
 export function nowPlaying(state = {}, action) {
   switch (action.type) {
     case "GET_NOW_PLAYING":
-      console.log("reducer fired" + action);
       return action.nowPlaying;
     default:
       return state;

@@ -3,7 +3,7 @@ import "./App.scss";
 
 class SongCard extends Component {
   render() {
-    if (this.props.nowPlaying.artists === undefined) {
+    if (!this.props.nowPlaying.artists) {
       return (
         <div id="nowPlayingCard">
           <p>Nothing Playling</p>
