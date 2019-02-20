@@ -76,8 +76,8 @@ app.get("/callback", function(req, res) {
       };
       request.get(options, function(error, response, body) {});
       res.redirect(
-        // "https://spotify-shuffle.herokuapp.com/#" + CHANGE FOR PRODUCTION
-        "http://localhost:3000/#" +
+        "https://spotify-shuffle.herokuapp.com/dashboard" +
+          // "http://localhost:3000/dashboard" +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
