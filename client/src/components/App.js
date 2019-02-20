@@ -54,7 +54,7 @@ class App extends Component {
       this.props.loggedIn(userLoggedIn);
     });
     // this is the url mask
-    window.history.pushState(null, "", "/");
+    // window.history.pushState(null, "", "/");
   }
 
   updateInput = e => {
