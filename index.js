@@ -6,7 +6,7 @@ const request = require("request");
 const querystring = require("querystring");
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
-const redirect_uri = "https://spotify-shuffle.herokuapp.com/callback";
+const redirect_uri = "https://spotify-shuffle.herokuapp.com/dashboard/callback";
 // const redirect_uri = "http://localhost:5000/dashboard/callback"; // Your redirect uri
 
 var generateRandomString = function(length) {
