@@ -10,6 +10,8 @@ import Card from "./Card";
 import ArtistListChip from "./ArtistListChip";
 import PlaylistStyle from "./PlaylistStyle";
 import GenreChips from "./GenreChips";
+import Paper from "@material-ui/core/Paper";
+import Select from "./Select";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -52,8 +54,6 @@ class App extends Component {
       let userLoggedIn = token ? true : false;
       this.props.loggedIn(userLoggedIn);
     });
-    // this is the url mask
-    // window.history.pushState(null, "", "/");
   }
 
   updateInput = e => {
@@ -140,58 +140,52 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <NavBar
-          user={this.props.user}
-          login={this.props.isLoggedIn}
-          nowPlaying={this.props.nowPlaying}
-          createSongList={this.createSongList}
-        />
-        <div className="mainBody">
-          <div className="topInfo">
-            <div>
-              <PlaylistStyle />
-            </div>
-            <div>
-              {this.props.isLoggedIn && (
-                <PlaylistSelect
-                  createGenreList={this.createGenrePlaylist}
-                  createArtistList={this.createArtistPlaylist}
-                />
-              )}
-            </div>
-            <div className="artistChips">
-              {this.state.artistList.map((artist, index) => (
-                <ArtistListChip
-                  key={index}
-                  chipArtist={artist}
-                  createArtistList={this.updateArtist}
-                />
-              ))}
-              {this.state.genreList.map((genre, index) => (
-                <GenreChips
-                  key={index}
-                  chipGenre={genre}
-                  createGenreList={() => this.createGenrePlaylist}
-                />
-              ))}
-            </div>
+      <Paper>
+        <div className="topInfo">
+          {/* <div>
+            <PlaylistStyle />
+          </div> */}
+          <div>
+            {this.props.isLoggedIn && (
+              <PlaylistSelect
+                createGenreList={this.createGenrePlaylist}
+                createArtistList={this.createArtistPlaylist}
+              />
+            )}
           </div>
-          <div className="playlists">
-            {this.props.createPlaylistTracks.map(track => (
-              <Card
-                track={track}
-                key={track.id}
-                id={track.id}
-                name={track.name}
-                artist={track.artist}
-                album={track.album.images[1].url}
-                createSongList={this.props.createSongList}
+          <div className="artistChips">
+            {this.state.artistList.map((artist, index) => (
+              <ArtistListChip
+                key={index}
+                chipArtist={artist}
+                createArtistList={this.updateArtist}
               />
             ))}
+
+            {this.state.genreList.map((genre, index) => (
+              <GenreChips
+                key={index}
+                chipGenre={genre}
+                createGenreList={() => this.createGenrePlaylist}
+              />
+            ))}
+            <Select />
           </div>
         </div>
-      </div>
+        <div className="playlists">
+          {this.props.createPlaylistTracks.map(track => (
+            <Card
+              track={track}
+              key={track.id}
+              id={track.id}
+              name={track.name}
+              artist={track.artist}
+              album={track.album.images[1].url}
+              createSongList={this.props.createSongList}
+            />
+          ))}
+        </div>
+      </Paper>
     );
   }
 }

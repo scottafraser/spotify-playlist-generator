@@ -1,71 +1,70 @@
-.App {
-  text-align: center;
+// .App {
+//   text-align: center;
+//   background-image: 100%;
+// }
 
-  background-image: 100%;
-}
+// .mainBody {
+//   padding: 5%;
+//   background-image: linear-gradient(120deg, darkgrey, #191414);
+//   background-repeat: no-repeat;
+//   background-attachment: fixed;
+// }
 
-.mainBody {
-  padding: 5%;
-  background-image: linear-gradient(120deg, darkgrey, #191414);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
+// .topInfo {
+//   position: relative;
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr;
+// }
 
-.topInfo {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+// .artistChips {
+//   grid-template-columns: col 3 / span 3;
+//   max-height: 500px;
+//   overflow: auto;
+// }
 
-.artistChips {
-  grid-template-columns: col 3 / span 3;
-  max-height: 500px;
-  overflow: auto;
-}
+// #bottom-fade {
+//   z-index: 2;
+//   position: fixed;
+//   height: 1000px;
+//   width: 100%;
+//   bottom: 0%;
+//   background-color: linear-gradient(rgba(0, 255, 85, 0.5), rgb(4, 92, 33));
+// }
 
-#bottom-fade {
-  z-index: 2;
-  position: fixed;
-  height: 1000px;
-  width: 100%;
-  bottom: 0%;
-  background-color: linear-gradient(rgba(0, 255, 85, 0.5), rgb(4, 92, 33));
-}
+// .playlists {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   padding: 2%;
+// }
 
-.playlists {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 2%;
-}
+// @media only screen and (max-width: 600px) {
+//   .topInfo {
+//     grid-template-columns: 1fr;
+//     display: felx;
+//     flex-direction: column;
+//   }
+//   .artistChips {
+//     display: none;
+//   }
+// }
 
-@media only screen and (max-width: 600px) {
-  .topInfo {
-    grid-template-columns: 1fr;
-    display: felx;
-    flex-direction: column;
-  }
-  .artistChips {
-    display: none;
-  }
-}
+// .App-logo {
+//   animation: App-logo-spin infinite 20s linear;
+//   height: 1180px;
+//   border-radius: 50%;
+// }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 1180px;
-  border-radius: 50%;
-}
+// #nowPlayingCard {
+//   text-align: center;
+//   padding: 2%;
+// }
 
-#nowPlayingCard {
-  text-align: center;
-  padding: 2%;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+// @keyframes App-logo-spin {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }

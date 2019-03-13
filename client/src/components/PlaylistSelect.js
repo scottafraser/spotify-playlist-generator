@@ -108,68 +108,61 @@ class PlaylistSelect extends React.Component {
         >
           Genre
         </Button>
-        {this.state.showGenre && (
-          <div>
-            <form
-              className="{classes.container}"
-              noValidate
-              autoComplete="off"
-              onSubmit={this.onGenreClick}
-            >
-              <TextField
-                id="outlined-genre"
-                label="Genre"
-                className={classes.textField}
-                value={this.props.genre}
-                onChange={this.handleGenreChange}
-                margin="normal"
-                variant="outlined"
-              />
-
-              <Button
-                onClick={this.onGenreClick}
-                variant="contained"
-                color="primary"
-                className={classes.button}
-              >
-                Shuffle Playlist
-              </Button>
-            </form>
-          </div>
-        )}
-        {this.state.showArtist && (
-          <div>
-            <form
-              className="{classes.container}"
-              noValidate
-              autoComplete="off"
-              onSubmit={this.onArtistClick}
-            >
-              <TextField
-                id="outlined-artist"
-                label="Artist"
-                className={classes.textField}
-                value={this.props.artist}
-                onChange={this.handleArtistChange}
-                margin="normal"
-                variant="outlined"
-              />
-            </form>
+        <div>
+          <form
+            className="{classes.container}"
+            noValidate
+            autoComplete="off"
+            onSubmit={this.onGenreClick}
+          >
+            <TextField
+              id="outlined-genre"
+              label="Genre"
+              className={classes.textField}
+              value={this.props.genre}
+              onChange={this.handleGenreChange}
+              margin="normal"
+              variant="outlined"
+            />
             <Button
-              onClick={this.onArtistClick}
+              onClick={this.onGenreClick}
               variant="contained"
               color="primary"
               className={classes.button}
             >
               Shuffle Playlist
             </Button>
-          </div>
-        )}
-        {this.state.showSave && (
-          <div>
-            <PushPlaylist />
-          </div>
-        )}
+          </form>
+        </div>
+        <div>
+          <form
+            className="{classes.container}"
+            noValidate
+            autoComplete="off"
+            onSubmit={this.onArtistClick}
+          >
+            <TextField
+              id="outlined-artist"
+              label="Artist"
+              className={classes.textField}
+              value={this.props.artist}
+              onChange={this.handleArtistChange}
+              margin="normal"
+              variant="outlined"
+            />
+          </form>
+          <Button
+            onClick={this.onArtistClick}
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            Shuffle Playlist
+          </Button>
+        </div>
+        <div>
+          <PushPlaylist />
+        </div>
       </div>
     );
   }

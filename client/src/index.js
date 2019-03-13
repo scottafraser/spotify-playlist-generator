@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import Home from "./components/Home";
+import Dashboard from "./components/Dashboard";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -34,7 +35,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/dashboard" component={App} />
+          <Route path="/app" component={App} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </MuiThemeProvider>
