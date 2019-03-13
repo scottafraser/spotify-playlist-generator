@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.scss";
 import { connect } from "react-redux";
 import SpotifyWebApi from "spotify-web-api-js";
-import record from "../images/record.jpeg";
 import NavBar from "./NavBar";
 import PropTypes from "prop-types";
 import * as actions from "../actions/items";
@@ -150,14 +149,10 @@ class App extends Component {
         />
         <div className="mainBody">
           <div className="topInfo">
-            <div>{/* <PlaylistStyle /> */}</div>
             <div>
-              <img
-                src={record}
-                alt="record"
-                className="App-logo"
-                style={{ height: 150 }}
-              />
+              <PlaylistStyle />
+            </div>
+            <div>
               {this.props.isLoggedIn && (
                 <PlaylistSelect
                   createGenreList={this.createGenrePlaylist}

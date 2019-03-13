@@ -125,15 +125,16 @@ class PlaylistSelect extends React.Component {
                 margin="normal"
                 variant="outlined"
               />
+
+              <Button
+                onClick={this.onGenreClick}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+              >
+                Shuffle Playlist
+              </Button>
             </form>
-            <Button
-              onClick={this.onGenreClick}
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Shuffle Playlist
-            </Button>
           </div>
         )}
         {this.state.showArtist && (

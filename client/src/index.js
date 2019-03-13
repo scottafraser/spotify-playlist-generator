@@ -8,7 +8,8 @@ import configureStore from "./store/configureStore";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/purple";
-import green from "@material-ui/core/colors/green";
+import orange from "@material-ui/core/colors/orange";
+import indigo from "@material-ui/core/colors/indigo";
 
 // import ErrorBoundry from "./components/ErrorBoundry";
 
@@ -16,8 +17,8 @@ const store = configureStore();
 
 const theme = createMuiTheme({
   palette: {
-    primary: purple,
-    secondary: green
+    primary: indigo,
+    secondary: orange
   },
   status: {
     danger: "orange"
