@@ -7,7 +7,7 @@
       <v-toolbar-title class="white--text">News App</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid>
+      <v-container v-if="user" fluid>
         <MainContent :user="user"></MainContent>
       </v-container>
     </v-content>
