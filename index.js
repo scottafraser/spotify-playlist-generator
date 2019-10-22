@@ -7,7 +7,7 @@ const querystring = require("querystring");
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
 // const redirect_uri = "https://spotify-shuffle.herokuapp.com/callback/";
-const redirect_uri = "http://localhost:5000/callback"; // Your redirect uri
+const redirect_uri = "http://localhost:8080/callback"; // Your redirect uri
 
 var generateRandomString = function(length) {
   var text = "";
@@ -75,7 +75,7 @@ app.get("/callback", function(req, res) {
       };
       request.get(options, function(error, response, body) {});
       res.redirect(
-        "/dashboard#" +
+        "/" +
           // "https://spotify-shuffle.herokuapp.com/dashboard/#" +
           querystring.stringify({
             access_token: access_token,
@@ -124,7 +124,7 @@ app.get("/refresh_token", function(req, res) {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  res.sendFile(path.join(__dirname + "http://localhost:8080/ "));
 });
 
 const port = process.env.PORT || 5000;
